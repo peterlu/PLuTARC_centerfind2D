@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?fileVersion 4.0.0?>
+
+<cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+	<storageModule moduleId="org.eclipse.cdt.core.settings">
+		<cconfiguration id="intel.linux.x86_64.exe.rel.1913680807_13.1.0">
+			<storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="intel.linux.x86_64.exe.rel.1913680807_13.1.0" moduleId="org.eclipse.cdt.core.settings" name="Release">
+				<externalSettings/>
+				<extensions>
+					<extension id="org.eclipse.cdt.core.ELF" point="org.eclipse.cdt.core.BinaryParser"/>
+					<extension id="org.eclipse.cdt.core.GmakeErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+					<extension id="org.eclipse.cdt.core.ICCErrorParser" point="org.eclipse.cdt.core.ErrorParser"/>
+				</extensions>
+			</storageModule>
+			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+				<configuration artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="" id="intel.linux.x86_64.exe.rel.1913680807_13.1.0" name="Release" parent="intel.linux.x86_64.exe.rel_13.1.0">
+					<folderInfo id="intel.linux.x86_64.exe.rel.1913680807._13.1.0" name="/" resourcePath="">
+						<toolChain id="intel.toolchain.linux.x86_64.exe.rel.795236124_13.1.0" name="Intel Toolchain for Executable on Intel(R) 64" superClass="intel.toolchain.linux.x86_64.exe.rel_13.1.0">
+							<targetPlatform archList="x86_64" binaryParser="org.eclipse.cdt.core.ELF" id="intel.platform.linux.x86_64.exe.rel_13.1.0.459339267" name="Platform.Executable.Release" osList="linux" superClass="intel.platform.linux.x86_64.exe.rel_13.1.0"/>
+							<builder buildPath="${workspace_loc:/plu_centerfind2d/Release}" id="intel.builder.linux.x86_64.exe.rel.840403899_13.1.0" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Intel Builder" superClass="intel.builder.linux.x86_64.exe.rel_13.1.0"/>
+							<tool id="intel.cpp.compilestep.linux.x86_64.exe.rel.24800522_13.1.0" name="Intel Intel(R) 64 C++ Compiler " superClass="intel.cpp.compilestep.linux.x86_64.exe.rel_13.1.0">
+								<option id="intel.compilestep.perflibs.ipp.1361822817" name="Use Intel(R) Integrated Performance Primitives Libraries" superClass="intel.compilestep.perflibs.ipp" value="perflibs.ipp.common" valueType="enumerated"/>
+								<inputType id="intel.cpp.compilestep.input.1785409931" superClass="intel.cpp.compilestep.input"/>
+							</tool>
+							<tool id="intel.c.compilestep.linux.x86_64.exe.rel.639166936_13.1.0" name="Intel Intel(R) 64 C Compiler" superClass="intel.c.compilestep.linux.x86_64.exe.rel_13.1.0">
+								<option id="intel.compilestep.perflibs.ipp.1891636087" name="Use Intel(R) Integrated Performance Primitives Libraries" superClass="intel.compilestep.perflibs.ipp" value="perflibs.ipp.common" valueType="enumerated"/>
+								<inputType id="intel.c.compilestep.input.1007289582" superClass="intel.c.compilestep.input"/>
+							</tool>
+							<tool id="intel.c.linkstep.linux.x86_64.exe.rel.740014019_13.1.0" name="Intel Intel(R) 64 C Linker" superClass="intel.c.linkstep.linux.x86_64.exe.rel_13.1.0"/>
+							<tool id="intel.cpp.linkstep.linux.x86_64.exe.rel.323088778_13.1.0" name="Intel Intel(R) 64 C++ Linker" superClass="intel.cpp.linkstep.linux.x86_64.exe.rel_13.1.0">
+								<option id="intel.linkstep.libname.1693578786" name="Additional Libraries (-l)" superClass="intel.linkstep.libname" valueType="libs">
+									<listOptionValue builtIn="false" value="freeimage"/>
+								</option>
+								<option id="intel.linkstep.options.shared_intel.1239994405" name="Link with Dynamic Libraries (-shared-intel)" superClass="intel.linkstep.options.shared_intel" value="true" valueType="boolean"/>
+								<option id="intel.linkstep.perflibs.ipp.1393584678" name="Use Intel(R) Integrated Performance Primitives Libraries" superClass="intel.linkstep.perflibs.ipp" value="perflibs.ipp.none" valueType="enumerated"/>
+								<inputType id="intel.linkstep.input.1569876684" superClass="intel.linkstep.input">
+									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
+									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
+								</inputType>
+							</tool>
+						</toolChain>
+					</folderInfo>
+				</configuration>
+			</storageModule>
+			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+		</cconfiguration>
+	</storageModule>
+	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
+		<project id="plu_centerfind2d.intel.linux.executable.2.750718633" name="Executable" projectType="intel.linux.executable.2"/>
+	</storageModule>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+	<storageModule moduleId="refreshScope"/>
+</cproject>
