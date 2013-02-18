@@ -41,14 +41,14 @@
 
 #include "params1.h"
 
-string Date_Last_Updated="11 Feb 2013";
-string Version_Number="1.81";
+string Date_Last_Updated="18 Feb 2013";
+string Version_Number="1.9";
 
 Params::Params(const int numargs)
 {
 	if(numargs < 13) {
 		cout << "plu_centerfind 'infilestem' 'outfilestem' start_frame,end_frame,start_stack,end_stack,gauss_rad,hwhm_rad,dil_rad,mask_rad,pct_thresh,testmode" << endl;
-		cout << "(C)opyright 2013 Peter J. Lu. All Rights Reserved. http://www.peterlu.org" << endl;
+		cout << "(C)opyright 2002-2013 Peter J. Lu. All Rights Reserved. http://www.peterlu.org" << endl;
 		cout << endl << "****If you use this code, please cite in your publications: " << endl;
 		cout << "P. J. Lu, P. A. Sims, H. Oki, J. B. Macarthur, and D. A. Weitz, " << endl;
 		cout << "Target-locking acquisition with real-time confocal (TARC) microscopy," << endl;
@@ -117,7 +117,7 @@ void Params::PrintOutParameters(ostream &out)
 {
 	out << "Particle 2D Center Locator, ";
 	out << "Version " << Version_Number << "; last updated " << Date_Last_Updated << endl;
-	out << "(C)opyright 2008 Peter J. Lu. All Rights Reserved." << endl << endl;
+	out << "(C)opyright 2002-2013 Peter J. Lu. All Rights Reserved." << endl << endl;
 	out << endl << "****If you use this code, please cite in your publications: " << endl;
 	out << "P. J. Lu, P. A. Sims, H. Oki, J. B. Macarthur, and D. A. Weitz, " << endl;
 	out << "Target-locking acquisition with real-time confocal (TARC) microscopy," << endl;

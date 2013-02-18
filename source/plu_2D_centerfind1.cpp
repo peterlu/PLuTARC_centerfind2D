@@ -13,6 +13,7 @@
 // Version 1.7 (25 August 2008):		Switched to 3D TIFF stacks for input, mirroring PLuTARC update
 // Version 1.8 (18 April 2009):		Switched to Intel C++ Compiler 11, now cross-platform for both Windows and Linux, timing corrected 11 Oct 2009
 // Version 1.81 (11 Feb 2013):		Switched to Intel C++ Compiler 13, IPP 7.1, and tweaked timing code
+// Version 1.9 (18 Feb 2013):		Implemented circular convolution instead of tophat; by Eli Sloutskin
 //
 //This program is free software; you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
