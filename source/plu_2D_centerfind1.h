@@ -1,5 +1,5 @@
 //Peter J. Lu
-//Copyright 2009-2013 Peter J. Lu.
+//Copyright 2002-2013 Peter J. Lu.
 //http://www.peterlu.org
 //plu@fas.harvard.edu
 //

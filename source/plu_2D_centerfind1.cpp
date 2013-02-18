@@ -51,7 +51,6 @@
 //work.
 
 //header files for my code
-//#include <time.h>
 #include <ctime>
 #include "plu_2D_centerfind1.h"
 #include "params1.h"
@@ -108,9 +107,6 @@ int main(int argc, char* argv[])
 {
 	//keep track of timing: start timer
 	clock_t starttime = clock();
-	//time_t starttime, now;
-	//time(&starttime);
-
 
 	//initialize parameters
 	Params Params1(argc);
@@ -197,14 +193,11 @@ int main(int argc, char* argv[])
 		FreeImage_CloseMultiBitmap(FI_in_image_stack, TIFF_DEFAULT);
 
 		float elapsed_time = (float) (clock() - starttime)/CLOCKS_PER_SEC;
-		//datafiles.outparamfile << "Elapsed time after analyzing stack: " << j << ": " << difftime(time(&now),starttime) << " seconds" << endl;
-		//cout << "Elapsed time after analyzing stack: " << j << ": " << difftime(time(&now),starttime) << " seconds" << endl;
 		datafiles.outparamfile << "Elapsed time after analyzing stack: " << j << ": " << elapsed_time << " seconds" << endl;
 		cout << "Elapsed time after analyzing stack: " << j << ": " << elapsed_time << " seconds" << endl;
 	}
 
 	//Show total time to run program
-	//double elapsed_time = difftime(time(&now),starttime);
 	float total_time = (float) (clock() - starttime)/CLOCKS_PER_SEC;
 	cout << endl << "Total time: " << total_time << " seconds" << endl;
 	datafiles.outparamfile << endl << "Total time: " << total_time << " seconds" << endl;
