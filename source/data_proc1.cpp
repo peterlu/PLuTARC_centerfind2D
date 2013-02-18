@@ -47,6 +47,7 @@ IppStatus BandPass_2D(Image2D &image_in, Image2D &image_bandpassed, const int fe
 	//set status variable
 	IppStatus status;
 	Gaussian_Kernel GaussKernel(feature_radius, hwhm_length, image_in.get_width(), image_in.get_length());
+	Convolution_Kernel ConvolutionKernels(feature_radius, image_in.get_width(), image_in.get_length());
 	Tophat_Kernel TopHatKernel(feature_radius, image_in.get_width(), image_in.get_length());
 	int number_of_pixels = image_in.get_numberofpixels();
 	int step_size = image_in.get_stepsize();
@@ -66,19 +67,21 @@ IppStatus BandPass_2D(Image2D &image_in, Image2D &image_bandpassed, const int fe
 		GaussKernel.get_ROI_size(), GaussKernel.get_gaussian_kernel(),
 		GaussKernel.get_kernel_length(), GaussKernel.get_anchor_point());
 
+/*
 	//tophat kernel convolution/filterbox operation
 	status = ippiFilterBox_32f_C1R(image_in.get_image2D() + TopHatKernel.get_offset(), step_size,
 		image_tophat.get_image2D() + TopHatKernel.get_offset(), step_size,
 		TopHatKernel.get_ROI_size(), TopHatKernel.get_mask_size(),
 		TopHatKernel.get_anchor_point());
+*/
 
-	//Eli Sloutskin: take away bias of square filtering kernel
-/*    status = ippiConvValid_32f_C1R(image_in.get_image2D(), step_size, image_in.get_ROIfull(),
+	//change by Eli Sloutskin: take away bias of square filtering kernel
+    status = ippiConvValid_32f_C1R(image_in.get_image2D(), step_size, image_in.get_ROIfull(),
             ConvolutionKernels.get_circle_kernel(), ConvolutionKernels.get_kernel_step(), ConvolutionKernels.get_kernel_size(),
             image_tophat.get_image2D() + ConvolutionKernels.get_offset(), step_size);
 
     ippiDivC_32f_C1IR(3*feature_radius*feature_radius, image_tophat.get_image2D(),image_tophat.get_stepsize(),image_tophat.get_ROIfull());
-*/
+
 	//subtract the two images
 	status = ippiSub_32f_C1R(image_tophat.get_image2D() + TopHatKernel.get_offset(), step_size,
 		image_gauss_rowcol.get_image2D()+TopHatKernel.get_offset(), step_size,
