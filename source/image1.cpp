@@ -60,6 +60,12 @@ imagedata(NULL), stepsize(0), width(0), length(0)
 
 }
 
+Image2D::Image2D():
+imagedata(NULL), stepsize(0), width(0), length(0)
+{
+
+}
+
 Image2D::~Image2D()
 {
 	ippsFree(imagedata);

@@ -41,8 +41,8 @@
 
 #include "params1.h"
 
-string Date_Last_Updated="18 Feb 2013";
-string Version_Number="1.9";
+string Date_Last_Updated="24 Feb 2013";
+string Version_Number="2.0";
 
 Params::Params(const int numargs)
 {
@@ -60,7 +60,7 @@ Params::Params(const int numargs)
 		cout << "dil_rad: radius of dilation kernel mask." << endl;
 		cout << "mask_rad: radius of mask for calculating statistics." << endl;
 		cout << "pct_thresh: analyse data above this percentile threshold." << endl;
-		cout << "testmode: 0--only text; 1--show intermediate images;\n          2--images for stacks 1, 101, 201, etc." << endl;
+		cout << "testmode: 0--only HDF5 data; 1--show intermediate images;\n          2--images for stacks 1, 101, 201, etc.; 3--plain text output" << endl;
 	}
 }
 

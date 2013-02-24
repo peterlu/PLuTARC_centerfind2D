@@ -20,6 +20,14 @@
 							<builder buildPath="${workspace_loc:/plu_centerfind2d/Release}" id="intel.builder.linux.x86_64.exe.rel.840403899_13.1.0" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="Intel Builder" superClass="intel.builder.linux.x86_64.exe.rel_13.1.0"/>
 							<tool id="intel.cpp.compilestep.linux.x86_64.exe.rel.24800522_13.1.0" name="Intel Intel(R) 64 C++ Compiler " superClass="intel.cpp.compilestep.linux.x86_64.exe.rel_13.1.0">
 								<option id="intel.compilestep.perflibs.ipp.1361822817" name="Use Intel(R) Integrated Performance Primitives Libraries" superClass="intel.compilestep.perflibs.ipp" value="perflibs.ipp.common" valueType="enumerated"/>
+								<option id="intel.compilestep.data.OpenMP.1699506929" name="Process OpenMP Directives" superClass="intel.compilestep.data.OpenMP" value="openmp.3" valueType="enumerated"/>
+								<option id="intel.compilestep.optimization.optprefetch.2146168188" name="Enable Prefetch Insertion (-opt-prefetch[=n])" superClass="intel.compilestep.optimization.optprefetch" value="optprefetch.zero" valueType="enumerated"/>
+								<option id="intel.compilestep.optimization.ipo.452326887" name="Enable Whole Program Optimization (-ipo)" superClass="intel.compilestep.optimization.ipo" value="false" valueType="boolean"/>
+								<option id="intel.compilestep.optimization.ip.13097518" name="Enable Interprocedural Optimization for Single File Compilation (-ip)" superClass="intel.compilestep.optimization.ip" value="false" valueType="boolean"/>
+								<option id="intel.compilestep.optimization.inline.expand1.1989242829" name="Inline Function Expansion" superClass="intel.compilestep.optimization.inline.expand1" value="inl.exp1.inlinedir" valueType="enumerated"/>
+								<option id="intel.compilestep.optimization.pgo2.2009761594" name="Profile Guided Optimization" superClass="intel.compilestep.optimization.pgo2" value="intel.opt.pgo.none" valueType="enumerated"/>
+								<option id="intel.compilestep.optimization.parallel.1704333305" name="Parallelization (-parallel)" superClass="intel.compilestep.optimization.parallel" value="false" valueType="boolean"/>
+								<option id="intel.compilestep.language.multibyte.321814310" name="Support Multibyte Characters in Source (-multibyte-chars)" superClass="intel.compilestep.language.multibyte" value="false" valueType="boolean"/>
 								<inputType id="intel.cpp.compilestep.input.1785409931" superClass="intel.cpp.compilestep.input"/>
 							</tool>
 							<tool id="intel.c.compilestep.linux.x86_64.exe.rel.639166936_13.1.0" name="Intel Intel(R) 64 C Compiler" superClass="intel.c.compilestep.linux.x86_64.exe.rel_13.1.0">
@@ -30,9 +38,13 @@
 							<tool id="intel.cpp.linkstep.linux.x86_64.exe.rel.323088778_13.1.0" name="Intel Intel(R) 64 C++ Linker" superClass="intel.cpp.linkstep.linux.x86_64.exe.rel_13.1.0">
 								<option id="intel.linkstep.libname.1693578786" name="Additional Libraries (-l)" superClass="intel.linkstep.libname" valueType="libs">
 									<listOptionValue builtIn="false" value="freeimage"/>
+									<listOptionValue builtIn="false" value="hdf5"/>
+									<listOptionValue builtIn="false" value="hdf5_hl"/>
 								</option>
 								<option id="intel.linkstep.options.shared_intel.1239994405" name="Link with Dynamic Libraries (-shared-intel)" superClass="intel.linkstep.options.shared_intel" value="true" valueType="boolean"/>
-								<option id="intel.linkstep.perflibs.ipp.1393584678" name="Use Intel(R) Integrated Performance Primitives Libraries" superClass="intel.linkstep.perflibs.ipp" value="perflibs.ipp.none" valueType="enumerated"/>
+								<option id="intel.linkstep.perflibs.ipp.1393584678" name="Use Intel(R) Integrated Performance Primitives Libraries" superClass="intel.linkstep.perflibs.ipp" value="perflibs.ipp.common" valueType="enumerated"/>
+								<option id="intel.linkstep.options.OpenMP.838698675" name="Process OpenMP Directives" superClass="intel.linkstep.options.OpenMP" value="openmp.1" valueType="enumerated"/>
+								<option id="intel.linkstep.parallel.2113694962" name="Parallelization (-parallel)" superClass="intel.linkstep.parallel" value="false" valueType="boolean"/>
 								<inputType id="intel.linkstep.input.1569876684" superClass="intel.linkstep.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -48,9 +60,19 @@
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="plu_centerfind2d.intel.linux.executable.2.750718633" name="Executable" projectType="intel.linux.executable.2"/>
 	</storageModule>
+	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Release">
+			<resource resourceType="PROJECT" workspacePath="/plu_centerfind2d"/>
+		</configuration>
+	</storageModule>
 	<storageModule moduleId="scannerConfiguration">
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="intel.linux.x86_64.exe.rel.1913680807_13.1.0;intel.linux.x86_64.exe.rel.1913680807._13.1.0;intel.c.compilestep.linux.x86_64.exe.rel.639166936_13.1.0;intel.c.compilestep.input.1007289582">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.intel.compiler.cdt.managedbuilder.ui.ICCManagedMakePerProjectProfile"/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="intel.linux.x86_64.exe.rel.1913680807_13.1.0;intel.linux.x86_64.exe.rel.1913680807._13.1.0;intel.cpp.compilestep.linux.x86_64.exe.rel.24800522_13.1.0;intel.cpp.compilestep.input.1785409931">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.intel.compiler.cdt.managedbuilder.ui.ICCManagedMakePerProjectProfile"/>
+		</scannerConfigBuildInfo>
 	</storageModule>
-	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
-	<storageModule moduleId="refreshScope"/>
 </cproject>

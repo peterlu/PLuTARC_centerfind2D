@@ -14,6 +14,7 @@
 // Version 1.8 (18 April 2009):		Switched to Intel C++ Compiler 11, now cross-platform for both Windows and Linux, timing corrected 11 Oct 2009
 // Version 1.81 (11 Feb 2013):		Switched to Intel C++ Compiler 13, IPP 7.1, and tweaked timing code
 // Version 1.9 (18 Feb 2013):		Implemented circular convolution instead of tophat; by Eli Sloutskin
+// Version 2.0 (24 Feb 2013):		Switched main output format to HDF5 (compression, directory structure, full floating point)
 //
 //This program is free software; you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -97,7 +98,13 @@ void find_centers_2D(Image2D &image_in, const Params &Parameters, Filestreams &f
 		//print out images for stack 1, 101, 201, etc.
 		PrintOutputImages(image_in, image_bpass_thresh, image_localmax, Parameters, framenumber, stacknumber, filt_imagestack, over_imagestack);
 	}
-	PrintParticleData(files.outdatafile, particledata, 0, counter, framenumber, stacknumber);
+
+	if(Parameters.get_testmode() == 3) {
+		//print out plain text data in old columnar format
+		PrintParticleData(files.outdatafile, particledata, 0, counter, framenumber, stacknumber);
+	}
+	//in all cases, print out particle position data in binary hdf5 format
+	PrintParticleData_hdf5(files.outdata_hdf5_file, particledata, counter, framenumber, stacknumber);
 
 	delete [] particledata;
 	particledata = NULL;
@@ -116,10 +123,10 @@ int main(int argc, char* argv[])
 	}
 	static Params Parameters(argc, argv);
 
-	static int start_frameofstack = Parameters.get_start_frameofstack();
-	static int end_frameofstack = Parameters.get_end_frameofstack();
-	static int start_stack = Parameters.get_start_stack();
-	static int end_stack = Parameters.get_end_stack();
+	static const int start_frameofstack = Parameters.get_start_frameofstack();
+	static const int end_frameofstack = Parameters.get_end_frameofstack();
+	static const int start_stack = Parameters.get_start_stack();
+	static const int end_stack = Parameters.get_end_stack();
 
 	Filestreams datafiles(Parameters);
 
@@ -128,7 +135,7 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
-	if(Parameters.get_testmode() !=3) {
+	if(Parameters.get_testmode() !=4) {
 		Parameters.PrintOutParameters(cout);
 	}
 	Parameters.PrintOutParameters(datafiles.outparamfile);
@@ -141,8 +148,8 @@ int main(int argc, char* argv[])
 	FIMULTIBITMAP *FI_out_image_stack_filt;
 	FIMULTIBITMAP *FI_out_image_stack_over;
 
+	//before beginning analysis, validate that all files exist
 	for(j = start_stack; j <= end_stack; j++) {
-
 		//validate whether input image files exist
 		string infilename = Parameters.get_infilestem() + make_stack_number(j) + Parameters.get_file_extension();
 		ifstream file_test;
@@ -152,9 +159,13 @@ int main(int argc, char* argv[])
 			return -1;
 		}
 		file_test.close();
+	}
+
+	for(j = start_stack; j <= end_stack; j++) {
 
 		//open input file
-		FI_in_image_stack = FreeImage_OpenMultiBitmap(FIF_TIFF, infilename.c_str(), FALSE, TRUE, TIFF_DEFAULT, TIFF_DEFAULT);
+		string infilename = Parameters.get_infilestem() + make_stack_number(j) + Parameters.get_file_extension();
+		FI_in_image_stack = FreeImage_OpenMultiBitmap(FIF_TIFF, infilename.c_str(), FALSE, TRUE, TRUE, TIFF_DEFAULT);
 
 		//check page count to make sure frame analyzed actually exists in the stack, and is selected by command-line parameter
 		const int actual_frames_in_input_stack = FreeImage_GetPageCount(FI_in_image_stack);
@@ -179,15 +190,16 @@ int main(int argc, char* argv[])
 		FI_out_image_stack_filt = FreeImage_OpenMultiBitmap(FIF_TIFF, outfilename_filt.c_str(), TRUE, FALSE, TRUE, TIFF_DEFAULT);
 		FI_out_image_stack_over = FreeImage_OpenMultiBitmap(FIF_TIFF, outfilename_over.c_str(), TRUE, FALSE, TRUE, TIFF_DEFAULT);
 
-		for(i = start_frameofstack-1; i < max_frame_num; i++) {
+
+//#pragma omp parallel for
+		for(i = start_frameofstack; i <= max_frame_num; i++) {
 			//Create IPP images by loading a specific page from multi-page TIFF for analysis, and converting to IPP format
-			Image2D image_in = TIFF_to_IPP(FreeImage_LockPage(FI_in_image_stack,i));
+			Image2D image_in = TIFF_to_IPP(FreeImage_LockPage(FI_in_image_stack,i-1));
 
 			//find centers of particles
 			find_centers_2D(image_in, Parameters, datafiles, i, j, FI_out_image_stack_filt, FI_out_image_stack_over);
 		}
 
-		datafiles.outparamfile << "Pages in multi-page TIFF " << outfilename_filt << ": " << FreeImage_GetPageCount(FI_out_image_stack_filt) << endl;
 
 		FreeImage_CloseMultiBitmap(FI_out_image_stack_filt, TIFF_DEFAULT);
 		FreeImage_CloseMultiBitmap(FI_out_image_stack_over, TIFF_JPEG);

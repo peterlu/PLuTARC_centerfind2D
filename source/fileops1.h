@@ -42,6 +42,8 @@
 #ifndef FILEOPS1
 #define FILEOPS1
 #include "params1.h"
+#include "hdf5.h"
+#include "hdf5_hl.h"
 #include <fstream>
 #include <iostream>
 #include <cstdlib>
@@ -57,6 +59,7 @@ public:
 
 	ofstream outdatafile;		//output data file (particle tracking data)
 	ofstream outparamfile;		//output file with run parameters
+	hid_t outdata_hdf5_file;	//output data file in hdf5 binary format
 };
 
 #endif

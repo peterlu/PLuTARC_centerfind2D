@@ -43,15 +43,32 @@
 
 Filestreams::Filestreams(const Params &Params)
 {
-	string datafilename = Params.get_outfilestem() + "_2DCenters.txt";
+	string h5filename = Params.get_outfilestem() + "_2DCenters.h5";
+	herr_t hdf5_status;
+	hid_t hdf5_group;
+	outdata_hdf5_file = H5Fcreate(h5filename.c_str(),
+			H5F_ACC_TRUNC, H5P_DEFAULT, H5P_DEFAULT);
+	for(int stacknumber = Params.get_start_stack(); stacknumber <= Params.get_end_stack(); stacknumber++) {
+		ostringstream hdf5_group_name_stream;
+		hdf5_group_name_stream << "stack" << stacknumber;
+		string hdf5_group_name = hdf5_group_name_stream.str();
+		hdf5_group = H5Gcreate2(outdata_hdf5_file, hdf5_group_name.c_str(), H5P_DEFAULT, H5P_DEFAULT, H5P_DEFAULT);
+		hdf5_status = H5Gclose(hdf5_group);
+	}
+
 	string paramfilename = Params.get_outfilestem() + "_2DCenters_log.txt";
-	outdatafile.open(datafilename.c_str(), ios::out);
 	outparamfile.open(paramfilename.c_str(), ios::out);
+
+	if(Params.get_testmode()==3) {
+	string datafilename = Params.get_outfilestem() + "_2DCenters.txt";
+	outdatafile.open(datafilename.c_str(), ios::out);
+	}
 }
 
 
 void Filestreams::closeall()
 {
+	herr_t hdf5_status = H5Fclose(outdata_hdf5_file);
 	outdatafile.close();
 	outparamfile.close();
 }
