@@ -27,11 +27,18 @@ git clone git@github.com:peterlu/PLuTARC_centerfind2D.git
 
 Note that I prefer using SSH certificates as the form of security here. To generate this, go to the home directory, make a directory labeled ".ssh" as a subdirectory of that home directory, and give permission value of 700. Then run ssh-keygen -t rsa, to create a public and private key pair. The public key, id_rsa.pub, can then be copied to the github site, if necessary (those these steps should not be needed for download only, just if you want to make changes to the code).
 
-2. Install also the following Ubuntu packages: "g++", "gcc-multilib".
+2. Install also the following Ubuntu packages (compiler, HDF5 for file output): 
+g++ 
+gcc-multilib
+h5utils 
+hdf5-tools 
+hdfview 
+libhdf5-serial-1.8.4 
+libhdf5-serial-dev
 
 3. The Intel Compiler and IPP must be installed for the program to work. Register for and download the Intel C++ Composer XE 2013 for Linux (64-bit, tested on version 2013.2). Run the "install.sh" as a regular user, and follow the prompts and instructions. Make sure to install both the compiler and IPP; the other tools are not necessary.
 
-4. The code also requires the FreeImage library to load and save images. Download the source distribution from:
+4. The code requires the FreeImage library to load and save images. Download the source distribution from:
 
 http://freeimage.sourceforge.net/
 
@@ -57,7 +64,10 @@ A number of build options are needed to compile and link the project. Under Proj
 
 a. Intel 64 C++ Compiler (v13.1.0) -> Performance Library Build Components: under "Use Intel Integrated Performance Primitives Libraries", select Use main libraries set (-ipp=common).
 
-b. Intel 64 C++ Linker (v13.1.0) -> Libraries: select "Link with Dynamic Libraries (-shared-intel), and under "Additional Libraries (-l)", add an entry with the lowercase text "freeimage".
+b. Intel 64 C++ Linker (v13.1.0) -> Libraries: select "Link with Dynamic Libraries (-shared-intel), and under "Additional Libraries (-l)", add an entries with the lowercase text:
+freeimage
+hdf5
+hdf5_hl
 
 The project should build correctly now. There may be warnings about deprecation of functions in IPP, but these can be ignored.
 
