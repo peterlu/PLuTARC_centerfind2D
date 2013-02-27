@@ -15,6 +15,7 @@
 // Version 1.81 (11 Feb 2013):		Switched to Intel C++ Compiler 13, IPP 7.1, and tweaked timing code
 // Version 1.9 (18 Feb 2013):		Implemented circular convolution instead of tophat; by Eli Sloutskin
 // Version 2.0 (24 Feb 2013):		Switched main output format to HDF5 (compression, directory structure, full floating point)
+// Version 2.01 (26 Feb 2013):		Added output of number of particles per slice to log file, as configuration mode 4 (for xyt)
 //
 //This program is free software; you can redistribute it and/or modify
 //it under the terms of the GNU General Public License as published by
@@ -103,6 +104,13 @@ void find_centers_2D(Image2D &image_in, const Params &Parameters, Filestreams &f
 		//print out plain text data in old columnar format
 		PrintParticleData(files.outdatafile, particledata, 0, counter, framenumber, stacknumber);
 	}
+
+	if(Parameters.get_testmode() == 4) {
+		//print particle count in log file for each individual slice
+		files.outparamfile << framenumber << "\t" << counter << endl;
+		//cout << framenumber << counter << endl;
+	}
+
 	//in all cases, print out particle position data in binary hdf5 format
 	PrintParticleData_hdf5(files.outdata_hdf5_file, particledata, counter, framenumber, stacknumber);
 
@@ -135,9 +143,7 @@ int main(int argc, char* argv[])
 		return -1;
 	}
 
-	if(Parameters.get_testmode() !=4) {
-		Parameters.PrintOutParameters(cout);
-	}
+	Parameters.PrintOutParameters(cout);
 	Parameters.PrintOutParameters(datafiles.outparamfile);
 
 	PrintParticleDataHeader(datafiles.outparamfile);
@@ -206,7 +212,7 @@ int main(int argc, char* argv[])
 		FreeImage_CloseMultiBitmap(FI_in_image_stack, TIFF_DEFAULT);
 
 		float elapsed_time = (float) (clock() - starttime)/CLOCKS_PER_SEC;
-		datafiles.outparamfile << "Elapsed time after analyzing stack: " << j << ": " << elapsed_time << " seconds" << endl;
+		datafiles.outparamfile << "Elapsed time after analyzing stack: " << j << ": " << elapsed_time << " seconds" << endl << endl;
 		cout << "Elapsed time after analyzing stack: " << j << ": " << elapsed_time << " seconds" << endl;
 	}
 
